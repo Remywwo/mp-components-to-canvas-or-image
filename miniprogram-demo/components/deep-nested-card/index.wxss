@@ -1,0 +1,35 @@
+.deep-card {
+  width: 686rpx;
+  min-height: 780rpx;
+  padding: 44rpx;
+  gap: 24rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: #ecfeff;
+  border-radius: 30rpx;
+  color: #164e63;
+}
+
+.deep-eyebrow {
+  color: #0891b2;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.deep-title {
+  color: #083344;
+  font-size: 48rpx;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.deep-desc {
+  color: #155e75;
+  font-size: 27rpx;
+  line-height: 1.55;
+}
+
+.deep-footer {
+  color: #0e7490;
+  font-size: 23rpx;
+}

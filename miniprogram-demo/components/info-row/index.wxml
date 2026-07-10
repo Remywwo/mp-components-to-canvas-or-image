@@ -1,0 +1,4 @@
+<view class="info-row">
+  <text class="info-row-label">{{label}}</text>
+  <text class="info-row-value">{{value}}</text>
+</view>

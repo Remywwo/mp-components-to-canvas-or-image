@@ -1,0 +1,13 @@
+<view class="deep-card">
+  <text class="deep-eyebrow">DEEP COMPONENT</text>
+  <text class="deep-title">{{title}}</text>
+  <text class="deep-desc">{{description}}</text>
+  <card-section
+    title="{{sectionTitle}}"
+    first-label="{{firstLabel}}"
+    first-value="{{firstValue}}"
+    second-label="{{secondLabel}}"
+    second-value="{{secondValue}}"
+  />
+  <text class="deep-footer">{{footer}}</text>
+</view>

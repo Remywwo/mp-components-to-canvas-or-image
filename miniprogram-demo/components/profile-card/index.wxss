@@ -1,0 +1,55 @@
+.profile-card {
+  width: 750rpx;
+  padding: 52rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 40rpx;
+  background: #f8fafc;
+  border-radius: 32rpx;
+}
+
+.profile-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 28rpx;
+}
+
+.avatar {
+  width: 116rpx;
+  height: 116rpx;
+  border-radius: 58rpx;
+  object-fit: cover;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.name {
+  font-size: 42rpx;
+  line-height: 1.2;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.role {
+  font-size: 26rpx;
+  line-height: 1.2;
+  color: #64748b;
+}
+
+.badge {
+  font-size: 24rpx;
+  line-height: 1.2;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.summary {
+  font-size: 30rpx;
+  line-height: 1.7;
+  color: #334155;
+}

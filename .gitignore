@@ -1,0 +1,6 @@
+node_modules/
+dist/
+exports/
+*.tsbuildinfo
+project.private.config.json
+**/project.private.config.json

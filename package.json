@@ -1,0 +1,21 @@
+{
+  "name": "generate-sharing",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:miniapp-demo && npm run build:miniapp && tsc --noEmit",
+    "build:miniapp": "node scripts/build-miniapp-runtime.mjs",
+    "build:miniapp-demo": "node scripts/build-miniapp-demo-templates.mjs",
+    "capture": "node scripts/capture-element.mjs",
+    "template:read": "node scripts/read-template-files.mjs",
+    "test": "vitest run src scripts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "esbuild": "^0.21.5",
+    "playwright": "^1.45.3",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}

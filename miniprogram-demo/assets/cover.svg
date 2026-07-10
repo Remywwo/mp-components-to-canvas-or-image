@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+  <rect width="900" height="520" fill="#2563eb"/>
+  <rect x="54" y="54" width="792" height="412" rx="36" fill="#eff6ff"/>
+  <circle cx="700" cy="150" r="76" fill="#93c5fd"/>
+  <path d="M96 420L300 245L430 350L525 260L804 420H96Z" fill="#1d4ed8"/>
+  <text x="96" y="140" font-family="Arial" font-size="52" fill="#111827" font-weight="700">Canvas Card</text>
+</svg>

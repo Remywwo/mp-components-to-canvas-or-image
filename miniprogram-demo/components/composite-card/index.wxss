@@ -1,0 +1,17 @@
+.composite-card {
+  width: 686rpx;
+  min-height: 760rpx;
+  padding: 48rpx;
+  gap: 28rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: #132238;
+  border-radius: 28rpx;
+  color: #f8fafc;
+}
+
+.composite-eyebrow { color: #5eead4; font-size: 22rpx; font-weight: 700; }
+.composite-title { font-size: 52rpx; line-height: 1.2; font-weight: 700; }
+.composite-summary { color: #cbd5e1; font-size: 28rpx; line-height: 1.6; }
+.composite-stats { display: flex; flex-direction: row; gap: 20rpx; }
+.composite-note { color: #94a3b8; font-size: 22rpx; }

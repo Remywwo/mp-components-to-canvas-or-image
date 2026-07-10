@@ -1,0 +1,10 @@
+<view class="composite-card">
+  <text class="composite-eyebrow">CUSTOM COMPONENT</text>
+  <text class="composite-title">{{title}}</text>
+  <text class="composite-summary">{{summary}}</text>
+  <view class="composite-stats">
+    <card-stat label="{{firstLabel}}" value="{{firstValue}}" />
+    <card-stat label="{{secondLabel}}" value="{{secondValue}}" />
+  </view>
+  <text class="composite-note">usingComponents -> WXML/WXSS -> Canvas</text>
+</view>

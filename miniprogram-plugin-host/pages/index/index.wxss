@@ -1,0 +1,81 @@
+.page {
+  padding: 24rpx;
+}
+
+.toolbar {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.toolbar.secondary {
+  margin-bottom: 20rpx;
+}
+
+.toolbar button {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  line-height: 80rpx;
+  color: #111827;
+  background: #ffffff;
+}
+
+.toolbar .primary {
+  color: #ffffff;
+  background: #2563eb;
+}
+
+.demo-tabs {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 20rpx;
+}
+
+.demo-tab {
+  flex: 1;
+  min-height: 64rpx;
+  padding: 0 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8rpx;
+  background: #e5e7eb;
+  color: #374151;
+  font-size: 24rpx;
+}
+
+.demo-tab.active {
+  color: #ffffff;
+  background: #111827;
+}
+
+.status {
+  min-height: 44rpx;
+  margin-bottom: 20rpx;
+  font-size: 24rpx;
+  color: #4b5563;
+}
+
+.canvas-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 20rpx 0;
+}
+
+.result {
+  margin-top: 24rpx;
+}
+
+.label {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: 24rpx;
+  color: #6b7280;
+}
+
+.preview {
+  width: 343px;
+  border-radius: 8rpx;
+}

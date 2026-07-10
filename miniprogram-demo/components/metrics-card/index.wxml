@@ -1,0 +1,19 @@
+<view class="metrics-card">
+  <text class="metrics-kicker">{{kicker}}</text>
+  <text class="metrics-title">{{title}}</text>
+  <view class="metrics-grid">
+    <view class="metric-item">
+      <text class="metric-value">{{primaryValue}}</text>
+      <text class="metric-label">{{primaryLabel}}</text>
+    </view>
+    <view class="metric-item accent">
+      <text class="metric-value">{{secondValue}}</text>
+      <text class="metric-label">{{secondLabel}}</text>
+    </view>
+    <view class="metric-item">
+      <text class="metric-value">{{thirdValue}}</text>
+      <text class="metric-label">{{thirdLabel}}</text>
+    </view>
+  </view>
+  <text class="metrics-note">{{note}}</text>
+</view>
