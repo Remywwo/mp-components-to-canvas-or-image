@@ -1,5 +1,0 @@
-<view class="card-section">
-  <text class="card-section-title">{{title}}</text>
-  <info-row label="{{firstLabel}}" value="{{firstValue}}" />
-  <info-row label="{{secondLabel}}" value="{{secondValue}}" />
-</view>

@@ -1,6 +1,6 @@
-# Generate Sharing DSL 规格
+# mp-components-to-canvas-or-image DSL 规格
 
-本文档定义 Generate Sharing 使用的受控 WXML/WXSS 子集，用于在微信小程序 Canvas 中稳定渲染分享卡片。
+本文档定义 mp-components-to-canvas-or-image 使用的受控 WXML/WXSS 子集，用于在微信小程序 Canvas 中稳定渲染分享卡片。
 
 ## 处理流程
 
@@ -147,24 +147,24 @@ const result = compileWxmlToHtml({
 - 所有节点都会添加 `data-wxml-tag`
 - `image` 默认补充空 `alt`
 
-HTML 输出会转义文本和属性值，避免用户输入破坏 Web 预览结构。该能力用于 Web 预览与调试，不替代小程序 Canvas 渲染管线。
+HTML 输出会转义文本和属性值，避免用户输入破坏预览结构。该能力仅用于调试，不替代小程序 Canvas 渲染管线。
 
-## 小程序插件
+## 小程序 npm 包
 
 构建运行时：
 
 ```bash
-npm run build:miniapp
+npm run build:npm
 ```
 
-插件产物：
+npm 包产物：
 
 ```text
-miniprogram-plugin/
-  plugin.json
-  api/share-card.js
-  runtime/share-card-runtime.js
-  components/share-card/
+.
+├── package.json
+├── api/share-card.js
+├── runtime/share-card-runtime.js
+└── components/share-card/
 ```
 
-可以使用插件 API 的 `renderToCanvas`，也可以调用 `<share-card />` 组件的 `render` 方法。
+可以使用 npm 包 API 的 `renderToCanvas`，也可以通过组件 `<share-card />` 的属性和事件触发渲染。

@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "usingComponents": {
+    "share-card": "/miniprogram_npm/mp-components-to-canvas-or-image/components/share-card/share-card"
+  },
+  "window": {
+    "navigationBarTitleText": "mp-components-to-canvas-or-image 测试",
+    "navigationBarBackgroundColor": "#111827",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f4f6f8"
+  }
+}

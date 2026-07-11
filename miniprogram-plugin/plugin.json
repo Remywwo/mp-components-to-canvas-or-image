@@ -1,6 +1,0 @@
-{
-  "main": "api/share-card.js",
-  "publicComponents": {
-    "share-card": "components/share-card/share-card"
-  }
-}

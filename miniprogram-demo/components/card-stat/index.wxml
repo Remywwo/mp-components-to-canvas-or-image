@@ -1,4 +1,0 @@
-<view class="card-stat">
-  <text class="card-stat-value">{{value}}</text>
-  <text class="card-stat-label">{{label}}</text>
-</view>

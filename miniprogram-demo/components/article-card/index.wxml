@@ -1,9 +1,0 @@
-<view class="card article-card">
-  <text class="eyebrow">{{eyebrow}}</text>
-  <text class="title">{{title}}</text>
-  <text class="body">{{body}}</text>
-  <view class="footer">
-    <text class="author">{{author}}</text>
-    <text class="date">{{date}}</text>
-  </view>
-</view>

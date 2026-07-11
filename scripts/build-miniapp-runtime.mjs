@@ -1,9 +1,12 @@
-import { mkdir, copyFile } from 'node:fs/promises';
 import { build } from 'esbuild';
+import { cp, mkdir, rm } from 'node:fs/promises';
+
+const packageRoot = '.';
+const demoPackageRoot = 'examples/miniprogram/miniprogram_npm/mp-components-to-canvas-or-image';
 
 await build({
-  entryPoints: ['src/miniapp-runtime/plugin-entry.ts'],
-  outfile: 'miniprogram-plugin/runtime/share-card-runtime.js',
+  entryPoints: ['src/miniapp-runtime/package-entry.ts'],
+  outfile: 'runtime/share-card-runtime.js',
   bundle: true,
   format: 'cjs',
   platform: 'browser',
@@ -12,5 +15,9 @@ await build({
   legalComments: 'none',
 });
 
-await mkdir('miniprogram-demo/runtime', { recursive: true });
-await copyFile('miniprogram-plugin/runtime/share-card-runtime.js', 'miniprogram-demo/runtime/share-card-runtime.js');
+await rm(demoPackageRoot, { recursive: true, force: true });
+await mkdir(demoPackageRoot, { recursive: true });
+
+for (const name of ['api', 'assets', 'components', 'runtime', 'README.md', 'package.json']) {
+  await cp(`${packageRoot}/${name}`, `${demoPackageRoot}/${name}`, { recursive: true });
+}

@@ -1,6 +1,0 @@
-Component({
-  properties: {
-    label: String,
-    value: String
-  }
-});

@@ -1,0 +1,6 @@
+<canvas
+  id="share-card-canvas"
+  type="2d"
+  class="share-card-canvas"
+  style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"
+></canvas>
