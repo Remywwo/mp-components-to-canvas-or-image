@@ -13,7 +13,6 @@ describe('miniapp npm package', () => {
     expect(existsSync(`${packageRoot}/components/share-card/share-card.wxss`)).toBe(true);
     expect(existsSync(`${packageRoot}/components/share-card/share-card.js`)).toBe(true);
     expect(existsSync(`${packageRoot}/api/share-card.js`)).toBe(true);
-    expect(existsSync(`${packageRoot}/assets/cover.svg`)).toBe(true);
     expect(existsSync(`${packageRoot}/runtime/share-card-runtime.js`)).toBe(true);
     expect(existsSync(`${packageRoot}/README.md`)).toBe(true);
 
@@ -22,7 +21,13 @@ describe('miniapp npm package', () => {
     expect(packageJson.private).not.toBe(true);
     expect(packageJson.main).toBe('api/share-card.js');
     expect(packageJson.miniprogram).toBe('.');
-    expect(packageJson.files).toEqual(expect.arrayContaining(['api', 'assets', 'components', 'runtime', 'README.md']));
+    expect(packageJson.description).toContain('微信小程序');
+    expect(packageJson.repository.url).toBe('git+ssh://git@github.com/Remywwo/geneerate-sharing.git');
+    expect(packageJson.bugs.url).toBe('https://github.com/Remywwo/geneerate-sharing/issues');
+    expect(packageJson.homepage).toBe('https://github.com/Remywwo/geneerate-sharing#readme');
+    expect(packageJson.publishConfig.registry).toBe('https://registry.npmjs.org/');
+    expect(packageJson.publishConfig.access).toBe('public');
+    expect(packageJson.files).toEqual(['api', 'components', 'runtime', 'README.md']);
     expect(packageJson.scripts.build).toBe('npm run build:npm && tsc --noEmit');
     expect(packageJson.scripts['build:npm']).toBe('node scripts/build-miniapp-runtime.mjs');
     expect(packageJson.scripts['build:plugin']).toBeUndefined();
@@ -42,6 +47,20 @@ describe('miniapp npm package', () => {
     expect(docs).toContain('wxml');
     expect(docs).toContain('wxss');
     expect(docs).toContain('renderToCanvas');
+    expect(docs).toContain('npm install mp-components-to-canvas-or-image');
+    expect(docs).toContain('微信开发者工具');
+    expect(docs).toContain('构建 npm');
+    expect(docs).toContain('render-options');
+    expect(docs).toContain('## 组件 API');
+    expect(docs).toContain('## JS API');
+    expect(docs).toContain('wx.canvasToTempFilePath');
+    expect(docs).toContain('createShareCardRenderer');
+    expect(docs).toContain('bind:rendered');
+    expect(docs).toContain('bind:exported');
+    expect(docs).not.toContain('## 项目结构');
+    expect(docs).not.toContain('## 本地开发');
+    expect(docs).not.toContain('## 发布前检查');
+    expect(docs).not.toContain('## 常见问题');
     expect(docs).toContain(`miniprogram_npm/${packageName}/components/share-card/share-card`);
   });
 

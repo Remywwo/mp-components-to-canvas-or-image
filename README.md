@@ -1,73 +1,24 @@
 # mp-components-to-canvas-or-image
 
-mp-components-to-canvas-or-image 是一个微信小程序 npm 包，用于把受控 WXML/WXSS/data 渲染成 Canvas 分享图片。
+微信小程序 npm 包：把受控 WXML/WXSS/data 渲染到 Canvas，并可通过组件导出为图片临时文件。
 
-## 项目结构
-
-仓库包含 npm 包源码和宿主测试小程序：
-
-```text
-.
-├── package.json
-├── api/share-card.js
-├── assets/cover.svg
-├── components/share-card
-├── runtime/share-card-runtime.js
-├── examples/miniprogram
-│   ├── project.config.json
-│   ├── app.json
-│   ├── miniprogram_npm/mp-components-to-canvas-or-image
-│   └── pages/index
-├── src/miniapp-runtime
-├── scripts/build-miniapp-runtime.mjs
-└── docs/dsl-spec.md
-```
-
-关键配置：
-
-- 根目录是 npm 包源码，不再是微信开发者工具项目。
-- 小程序 demo 位于 `examples/miniprogram/`。
-- demo 的 `project.config.json` 使用 `compileType: miniprogram` 和 `miniprogramRoot: ./`。
-
-## 开发
+## 安装
 
 ```bash
-npm install
-npm run build
-npm test
+npm install mp-components-to-canvas-or-image
 ```
 
-在微信开发者工具中打开 `examples/miniprogram/` 即可运行宿主测试小程序。宿主通过 `/miniprogram_npm/mp-components-to-canvas-or-image/components/share-card/share-card` 使用 npm 包组件。
+安装后，在微信开发者工具中执行“工具 -> 构建 npm”。构建完成后，小程序会生成：
 
-## npm 包入口
-
-npm 包源码位于仓库根目录：
-
-```json
-{
-  "name": "mp-components-to-canvas-or-image",
-  "main": "api/share-card.js",
-  "miniprogram": "."
-}
+```text
+miniprogram_npm/mp-components-to-canvas-or-image/
 ```
 
-JS API 位于 `api/share-card.js`，组件位于 `components/share-card/`。
+## 组件 API
 
-```js
-const shareCardPackage = require('/miniprogram_npm/mp-components-to-canvas-or-image/api/share-card');
+组件方式适合业务页面直接生成分享图。它内部会完成 Canvas 节点挂载、渲染、图片加载和导出。
 
-await shareCardPackage.renderToCanvas({
-  wxml: '<view class="card"><text>{{title}}</text></view>',
-  wxss: '.card { width: 343px; padding: 24px; background: #fff; }',
-  data: { title: '今日分享' },
-  viewportWidth: 343,
-  context,
-});
-```
-
-## 组件用法
-
-宿主小程序通过属性触发渲染和导出，通过事件接收结果：
+在页面或全局配置中注册组件：
 
 ```json
 {
@@ -77,6 +28,8 @@ await shareCardPackage.renderToCanvas({
 }
 ```
 
+页面 WXML：
+
 ```xml
 <share-card
   width="{{343}}"
@@ -84,39 +37,154 @@ await shareCardPackage.renderToCanvas({
   render-options="{{renderOptions}}"
   render-key="{{renderKey}}"
   export-key="{{exportKey}}"
+  bind:ready="onReady"
   bind:rendered="onRendered"
   bind:exported="onExported"
   bind:error="onError"
 />
 ```
 
-`renderKey` 每次递增会触发一次渲染；`exportKey` 每次递增会触发一次图片导出。
+页面 JS：
 
-## 运行时
+```js
+Page({
+  data: {
+    renderOptions: null,
+    renderKey: 0,
+    exportKey: 0,
+    imagePath: '',
+  },
 
-核心运行时代码在 `src/miniapp-runtime`。构建命令会把运行时打包到根目录 `runtime/`，并同步到 demo 的 `miniprogram_npm`：
+  renderCard() {
+    this.setData({
+      renderOptions: {
+        wxml: '<view class="card"><text class="title">{{title}}</text></view>',
+        wxss: '.card { width: 343px; padding: 24px; background: #fff; border-radius: 12px; } .title { color: #111827; font-size: 24px; font-weight: 700; }',
+        data: { title: '今日分享' },
+        mode: 'strict',
+        viewportWidth: 343,
+      },
+      renderKey: this.data.renderKey + 1,
+    });
+  },
 
-```bash
-npm run build:npm
+  exportCard() {
+    this.setData({
+      exportKey: this.data.exportKey + 1,
+    });
+  },
+
+  onReady(event) {
+    console.log('组件已挂载', event.detail);
+  },
+
+  onRendered(event) {
+    console.log('渲染完成', event.detail.box);
+  },
+
+  onExported(event) {
+    this.setData({
+      imagePath: event.detail.tempFilePath,
+    });
+  },
+
+  onError(event) {
+    wx.showToast({
+      title: event.detail.message,
+      icon: 'none',
+    });
+  },
+});
 ```
 
-输出文件：
+组件属性：
 
-```text
-runtime/share-card-runtime.js
-examples/miniprogram/miniprogram_npm/mp-components-to-canvas-or-image/
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `width` | `Number` | `375` | 初始 Canvas 宽度，单位 px。 |
+| `height` | `Number` | `600` | 初始 Canvas 高度，单位 px。 |
+| `render-options` | `Object` | `null` | 渲染参数。 |
+| `render-key` | `Number` | `0` | 每次递增都会触发一次渲染。 |
+| `export-key` | `Number` | `0` | 每次递增都会触发一次图片导出。 |
+
+组件事件：
+
+| 事件 | 说明 |
+| --- | --- |
+| `bind:ready` | 组件挂载完成。 |
+| `bind:rendered` | Canvas 渲染完成，返回布局结果。 |
+| `bind:exported` | 图片导出完成，返回 `tempFilePath`。 |
+| `bind:error` | 渲染或导出失败，返回 `{ message }`。 |
+
+`render-options` 参数：
+
+| 字段 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `wxml` | `String` | 是 | 受控 WXML 字符串。 |
+| `wxss` | `String` | 否 | 受控 WXSS 字符串。 |
+| `data` | `Object` | 否 | 模板变量数据，支持 `{{name}}`、`{{user.name}}`。 |
+| `mode` | `String` | 否 | `strict` 表示严格模式。 |
+| `viewportWidth` | `Number` | 否 | 布局视口宽度。 |
+| `resolveImage` | `Function` | 否 | 自定义图片解析函数。 |
+
+组件导出图片时内部使用微信小程序 API：
+
+```js
+wx.canvasToTempFilePath({
+  canvas,
+  width,
+  height,
+  destWidth,
+  destHeight,
+  fileType: 'png',
+  quality: 1,
+});
 ```
 
-## DSL 支持范围
+## JS API
 
-完整 DSL 契约见 [docs/dsl-spec.md](./docs/dsl-spec.md)。
+JS API 只负责渲染到 Canvas，不负责导出图片。适合你已经自己管理 Canvas 2D context 的场景。
 
-当前运行时只支持受控子集：
+```js
+const shareCardPackage = require('/miniprogram_npm/mp-components-to-canvas-or-image/api/share-card');
 
-- WXML 标签：`view`、`text`、`image`
-- 数据绑定：`{{name}}`、`{{user.name}}`
-- WXSS 选择器：标签、类、ID、多 class、后代选择器、逗号选择器
-- 布局：基础 Flex、尺寸、内外边距、gap、圆角、背景、文字和图片基础样式
-- 图片：通过 Canvas 2D `canvas.createImage()` 加载
+await shareCardPackage.renderToCanvas({
+  wxml: '<view class="card"><text>{{title}}</text></view>',
+  wxss: '.card { width: 343px; padding: 24px; background: #fff; } text { font-size: 24px; }',
+  data: { title: '今日分享' },
+  viewportWidth: 343,
+  context,
+  resolveImage,
+});
+```
 
-不支持完整小程序组件语义、事件、WXS、slot、`wx:for`、`wx:if`、复杂 CSS 布局等能力。
+也可以复用 renderer：
+
+```js
+const renderer = shareCardPackage.createShareCardRenderer({
+  resolveImage,
+});
+
+const result = await renderer.render({
+  wxml,
+  wxss,
+  data,
+  viewportWidth: 343,
+  context,
+});
+```
+
+## 支持范围
+
+当前支持受控子集：
+
+| 类型 | 支持内容 |
+| --- | --- |
+| WXML 标签 | `view`、`text`、`image` |
+| 数据绑定 | `{{name}}`、`{{user.name}}` |
+| WXSS 选择器 | 标签、类、ID、多 class、后代选择器、逗号选择器 |
+| 布局 | 基础 Flex、尺寸、内外边距、gap、圆角、背景 |
+| 文本 | 颜色、字号、字重、行高、基础换行 |
+| 图片 | 通过 Canvas 2D `canvas.createImage()` 加载 |
+
+暂不支持完整小程序组件语义、事件、生命周期、WXS、slot、`wx:for`、`wx:if`、复杂 CSS 布局，也不是直接截图真实 WXML 节点。

@@ -1,12 +1,19 @@
 {
   "name": "mp-components-to-canvas-or-image",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "微信小程序分享卡片 Canvas 渲染组件和运行时",
   "main": "api/share-card.js",
   "miniprogram": ".",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Remywwo/geneerate-sharing.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Remywwo/geneerate-sharing/issues"
+  },
+  "homepage": "https://github.com/Remywwo/geneerate-sharing#readme",
   "files": [
     "api",
-    "assets",
     "components",
     "runtime",
     "README.md"
@@ -19,9 +26,14 @@
     "sharing-card"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "scripts": {
     "build": "npm run build:npm && tsc --noEmit",
     "build:npm": "node scripts/build-miniapp-runtime.mjs",
+    "prepublishOnly": "npm test && npm run build",
     "test": "vitest run src scripts"
   },
   "dependencies": {},

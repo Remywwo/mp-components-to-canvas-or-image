@@ -18,6 +18,6 @@ await build({
 await rm(demoPackageRoot, { recursive: true, force: true });
 await mkdir(demoPackageRoot, { recursive: true });
 
-for (const name of ['api', 'assets', 'components', 'runtime', 'README.md', 'package.json']) {
+for (const name of ['api', 'components', 'runtime', 'README.md', 'package.json']) {
   await cp(`${packageRoot}/${name}`, `${demoPackageRoot}/${name}`, { recursive: true });
 }
