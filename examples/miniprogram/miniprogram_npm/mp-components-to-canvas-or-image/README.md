@@ -176,15 +176,4 @@ const result = await renderer.render({
 
 ## 支持范围
 
-当前支持受控子集：
-
-| 类型 | 支持内容 |
-| --- | --- |
-| WXML 标签 | `view`、`text`、`image` |
-| 数据绑定 | `{{name}}`、`{{user.name}}` |
-| WXSS 选择器 | 标签、类、ID、多 class、后代选择器、逗号选择器 |
-| 布局 | 基础 Flex、尺寸、内外边距、gap、圆角、背景 |
-| 文本 | 颜色、字号、字重、行高、基础换行 |
-| 图片 | 通过 Canvas 2D `canvas.createImage()` 加载 |
-
-暂不支持完整小程序组件语义、事件、生命周期、WXS、slot、`wx:for`、`wx:if`、复杂 CSS 布局，也不是直接截图真实 WXML 节点。
+具体可查看 [docs/dsl-spec.md](./docs/dsl-spec.md) 文档。
